@@ -19,7 +19,7 @@ O projeto tem como propósito disponibilizar dados de filmes da plataforma IMDB 
 
 Apresentamos uma visão geral das tecnologias empregadas e de como elas estão integradas no ecossistema.
 
-**Imagem:** ![Arquitetura do Sistema](link-da-imagem)
+![Arquitetura do Sistema](./imgs/arquitetura.png)
 
 **Tecnologias Utilizadas:**
 
@@ -38,34 +38,40 @@ Apresentamos uma visão geral das tecnologias empregadas e de como elas estão i
 
 O Airflow orquestra a coleta diária dos datasets da plataforma IMDB (https://datasets.imdbws.com/), englobando arquivos como `name.basics.tsv.gz`, `title.basics.tsv.gz`, entre outros.
 
-**Imagem:** ![Visão Geral das DAGs no Airflow](link-da-imagem)
+![Visão Geral das DAGs no Airflow](./imgs/ingest_dags.png)
 
 ### 3.2 Armazenamento no MinIO
 
 Após a coleta, os arquivos são armazenados no bucket do MinIO no diretório "downloaded", garantindo a preservação do formato original para futuras validações.
 
-**Imagem:** ![Diretórios no MinIO](link-da-imagem)
+![Diretórios no MinIO](./imgs/ingest_minio.png)
 
 ### 3.3 Processamento e Transformação
 
 Os dados coletados passam por etapas de extração e transformação:
 
 - Conversão para o formato CSV e armazenamento no diretório "datalake" do MinIO.
+  
+![Diretórios no MinIO](./imgs/datalake_minio.png)
+  
 - Posterior processamento para o formato Parquet, armazenados sob "datascience" no MinIO.
-
-**Imagem:** ![Diretórios no MinIO](link-da-imagem)
+  
+![Visão Geral das DAGs no Airflow](./imgs/ds_dags.png)
+![Diretórios no MinIO](./imgs/datascience_minio.png)
 
 ### 3.4 Carga no PostgreSQL
 
 Os dados do diretório "datalake" são extraídos e transferidos para tabelas no PostgreSQL, tornando-os prontos para análises estruturadas.
 
-**Imagem:** ![Estrutura das Tabelas no PostgreSQL](link-da-imagem)
+![Visão Geral das DAGs no Airflow](./imgs/bi_dags.png)
+
+ ![Estrutura das Tabelas no PostgreSQL](./imgs/postgres.png)
 
 ### 3.5 Visualização no Metabase
 
 Para uma visão ampla dos dados armazenados no PostgreSQL, utilizamos o Metabase, uma plataforma que permite a criação de dashboards personalizados.
 
-**Imagem:** ![Painel do Metabase](link-da-imagem)
+![Painel do Metabase](./imgs/metabase.png)
 
 ---
 
